@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
+const db = require("./db");
 
 const app = express();
 app.use(
@@ -27,8 +28,11 @@ const connection = mysql.createConnection({
 });
 
 db.connect((err) => {
-  if (err) throw err;
-  console.log("Connected to database");
+  if (err) {
+    console.error("Error connecting to the database:", err);
+    process.exit(1); // Exit the process with failure
+  }
+  console.log("Connected to the database");
 });
 
 // Helper functions
@@ -244,3 +248,4 @@ app.get("/bookings/:id", authenticateToken, (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+module.exports = app;
