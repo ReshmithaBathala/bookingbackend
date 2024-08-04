@@ -12,17 +12,18 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+require("dotenv").config();
 
 const PORT = 3000;
 const SECRET_KEY = "reshmitha_secret_key";
 const ADMIN_API_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJyZXNobWl0aGEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MjI3OTQ4NDUsImV4cCI6MTcyMjc5ODQ0NX0.GBvT3r1Z1yzqD0OSRGLNJOZsVcGfITPKaxWSk7vT8f8";
 
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "mysql",
-  database: "railway_management",
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
 
 db.connect((err) => {
