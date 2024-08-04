@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
-const db = require("./db");
+// const db = require("./db");
 
 const app = express();
 app.use(
